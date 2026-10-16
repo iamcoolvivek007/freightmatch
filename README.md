@@ -70,6 +70,15 @@ Money is integer cents. Dates are ISO `YYYY-MM-DD`. Errors are `{error: "..."}` 
 Driven end to end in a real browser and over the API: both intake forms, ranked matches, offer →
 counter → accept, booking a load and freeing the truck, revoke, cancel, and the error paths
 (bad equipment, bad date, duplicate reference, missing fields, double-booking).
-Deploy: http://187.126.121.100:8000/source/github/events — GitHub push → Coolify redeploy (verified).
-Auto-deploy: push to main -> webhook `http://187.126.121.100:8000/webhooks/source/github/events` -> Coolify redeploy.
-Webhook secret is the app GitHub webhook secret (set in Coolify → app → Webhooks).
+
+## Deployment
+
+Runs on Coolify as the `freightmatch` application (project *bharathtrucks*, production):
+https://hwoe1wgatabefuejpjrn1fcz.187.126.121.100.sslip.io
+
+- Dockerfile build pack, port 3000, health check on `/api/board`.
+- `/data` is a persistent Coolify volume, so the SQLite file survives every redeploy.
+- Push to `main` redeploys automatically: GitHub webhook →
+  `http://187.126.121.100:8000/webhooks/source/github/events/manual`, HMAC secret =
+  the app's GitHub webhook secret (Coolify → freightmatch → Webhooks).
+- Local: `docker build -t freightmatch . && docker run -p 3000:3000 -v fm-data:/data freightmatch`.
