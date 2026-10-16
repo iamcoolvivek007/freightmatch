@@ -72,3 +72,4 @@ counter → accept, booking a load and freeing the truck, revoke, cancel, and th
 (bad equipment, bad date, duplicate reference, missing fields, double-booking).
 Deploy: http://187.126.121.100:8000/source/github/events — GitHub push → Coolify redeploy (verified).
 Auto-deploy: push to main -> webhook `http://187.126.121.100:8000/webhooks/source/github/events` -> Coolify redeploy.
+Webhook secret is the app GitHub webhook secret (set in Coolify → app → Webhooks).
