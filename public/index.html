@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreightMatch — load & truck desk</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>FreightMatch</h1>
+  <nav id="tabs">
+    <button data-view="board" class="on">Board</button>
+    <button data-view="load">New load</button>
+    <button data-view="truck">New truck</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-board">
+    <div class="cols">
+      <div class="panel">
+        <h2>Open loads <span class="muted" id="loads-count"></span></h2>
+        <ul id="loads-list" class="cards"></ul>
+      </div>
+      <div class="panel">
+        <h2>Available trucks <span class="muted" id="trucks-count"></span></h2>
+        <ul id="trucks-list" class="cards"></ul>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Booked</h2>
+      <ul id="booked-list" class="cards"></ul>
+    </div>
+  </section>
+
+  <section id="view-load" hidden>
+    <form class="panel grid" id="form-load">
+      <h2>Log a load (shipper call)</h2>
+      <label>Reference<input name="ref" placeholder="L-1042" required></label>
+      <label>Shipper<input name="shipper" required></label>
+      <label>Shipper phone<input name="shipper_phone" placeholder="555-0100"></label>
+      <label>Commodity<input name="commodity" required></label>
+      <label>Origin city<input name="origin_city" required></label>
+      <label>Origin state<input name="origin_state" maxlength="2" required></label>
+      <label>Dest city<input name="dest_city" required></label>
+      <label>Dest state<input name="dest_state" maxlength="2" required></label>
+      <label>Pickup date<input name="pickup_date" type="date" required></label>
+      <label>Equipment<select name="equipment" id="equip-load"></select></label>
+      <label>Weight (lb)<input name="weight_lb" type="number" min="1" required></label>
+      <label>Posted rate ($)<input name="offered_rate" type="number" min="1" step="0.01" required></label>
+      <label class="wide">Notes<textarea name="notes" rows="2"></textarea></label>
+      <button type="submit">Save load</button>
+    </form>
+  </section>
+
+  <section id="view-truck" hidden>
+    <form class="panel grid" id="form-truck">
+      <h2>Log a truck (driver call)</h2>
+      <label>Driver<input name="driver" required></label>
+      <label>Phone<input name="phone" required></label>
+      <label>Truck #<input name="truck_number" placeholder="Unit 214"></label>
+      <label>Equipment<select name="equipment" id="equip-truck"></select></label>
+      <label>Capacity (lb)<input name="capacity_lb" type="number" min="1" required></label>
+      <label>Current city<input name="city" required></label>
+      <label>State<input name="state" maxlength="2" required></label>
+      <label>Available from<input name="available_date" type="date" required></label>
+      <label>All-in floor ($)<input name="min_rate" type="number" min="1" step="0.01" required></label>
+      <label class="wide">Notes<textarea name="notes" rows="2"></textarea></label>
+      <button type="submit">Save truck</button>
+    </form>
+  </section>
+</main>
+
+<dialog id="deal">
+  <header class="dlg-head">
+    <h2 id="deal-title"></h2>
+    <button id="deal-close" class="ghost">✕</button>
+  </header>
+  <div id="deal-body"></div>
+</dialog>
+
+<div id="toast"></div>
+<script src="/app.js" type="module"></script>
+</body>
+</html>

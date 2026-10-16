@@ -1,0 +1,1 @@
+{"type":"module","name":"freightmatch","private":true,"scripts":{"start":"node server.js","seed":"node seed.js"}}
