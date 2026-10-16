@@ -71,3 +71,4 @@ Driven end to end in a real browser and over the API: both intake forms, ranked 
 counter → accept, booking a load and freeing the truck, revoke, cancel, and the error paths
 (bad equipment, bad date, duplicate reference, missing fields, double-booking).
 Deploy: http://187.126.121.100:8000/source/github/events — GitHub push → Coolify redeploy (verified).
+Auto-deploy: push to main -> webhook `http://187.126.121.100:8000/webhooks/source/github/events` -> Coolify redeploy.
